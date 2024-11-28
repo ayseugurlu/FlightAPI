@@ -4,6 +4,8 @@
 ------------------------------------------------------- */
 const router = require('express').Router()
 const {list, create, read, update, deletePassenger} = require('../controllers/passenger')
+
+const {isAdmin, isStaffOrAdmin} =require('../middlewares/permissions')
 /* ------------------------------------------------------- */
 
 // URL: /passengers
@@ -17,7 +19,7 @@ router.route('/:id')
     .get(read)
     .put(update)
     .patch(update)
-    .delete(deletePassenger)
+    .delete(isAdmin,isStaffOrAdmin,deletePassenger)
 
 
 /* ------------------------------------------------------- */

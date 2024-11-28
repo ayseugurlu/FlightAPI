@@ -8,7 +8,7 @@
     "start": "nodemon"
   },
   "keywords": [],
-  "author": "Clarusway",
+  "author": "Ayse Ugurlu",
   "license": "ISC Licence",
   "dependencies": {
     "cors": "^2.8.5",

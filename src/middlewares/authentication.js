@@ -17,6 +17,7 @@ module.exports = (req, res, next) => {
 
         jwt.verify( tokenKey[1], process.env.ACCESS_KEY, (err, accessData) => {
             req.user = accessData ? accessData : null
+            req.body.createdId = req.user?._id
         })
      
     }

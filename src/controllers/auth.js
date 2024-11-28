@@ -10,6 +10,10 @@ const jwt = require('jsonwebtoken')
 
 module.exports = {
 
+
+    login: async (req, res) => {
+
+        
      /*
             #swagger.tags = ["Authentication"]
             #swagger.summary = "Login"
@@ -23,8 +27,6 @@ module.exports = {
                 }
             }
         */
-
-    login: async (req, res) => {
 
         const { userName, email, password } = req.body
 
@@ -74,7 +76,7 @@ module.exports = {
                 access: accessToken,
                 refresh: refreshToken
             },
-            user
+           
         })
 
 
@@ -82,17 +84,16 @@ module.exports = {
 
     refresh: async(req,res) => {
 
-         /*
+     /*
             #swagger.tags = ["Authentication"]
             #swagger.summary = "Refresh"
-            #swagger.description = 'Refresh with refreshToken for get accessToken'
+            #swagger.description = 'Login with username (or email) and password for JWT'
             #swagger.parameters["body"] = {
                 in: "body",
                 required: true,
                 schema: {
-                    "bearer": {
-                        refresh: '...refresh_token...'
-                    }
+                    "username": "test",
+                    "password": "aA?123456",
                 }
             }
         */
@@ -134,23 +135,38 @@ module.exports = {
 
     logout: async(req,res) => {
 
-        const blacklistedTokens = []; //bu normalde tepede globalde olmali
+             /*
+         #swagger.tags = ["Authentication"]
+         #swagger.summary = "Logout"
+         #swagger.description = 'Logs the user out. No specific process needed for logout as JWT tokens are stateless.'
+     */
 
-        const auth = req.headers?.authorization
+         
 
-        const tokenKey = auth? auth.split(' ')[1] : null
+        // const blacklistedTokens = []; //bu normalde tepede globalde olmali
 
-        if(tokenKey){
+        // const auth = req.headers?.authorization
 
-            blackListedToken.push(tokenKey)
-            res.status(200).send({
-                error:false,
-                message: 'Token blacklisted'
-            })
+        // const tokenKey = auth? auth.split(' ')[1] : null
 
-        }else{
-            res.status(400).send({ message: 'Token is missing' });
-        }
+        // if(tokenKey){
+
+        //     blackListedToken.push(tokenKey)
+        //     res.status(200).send({
+        //         error:false,
+        //         message: 'Token blacklisted'
+        //     })
+
+        // }else{
+        //     res.status(400).send({ message: 'Token is missing' });
+        // }
+        
        
+        
+                res.send({
+                    error: false,
+                    message: 'JWT: No need any process for logout.',
+                })
+
     }
 }

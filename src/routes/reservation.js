@@ -4,6 +4,7 @@
 ------------------------------------------------------- */
 const router = require('express').Router()
 const {list, create, read, update, deleteReservation} = require('../controllers/reservation')
+const {isAdmin, isStaffOrAdmin} = require('../middlewares/permissions')
 /* ------------------------------------------------------- */
 
 // URL: /passengers

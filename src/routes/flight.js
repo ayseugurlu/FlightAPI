@@ -5,7 +5,7 @@
 const router = require('express').Router()
 const {list, create, read, update, deleteFlight} = require('../controllers/flight')
 
-const {isLogin} = require('../middlewares/permissions')
+const {isLogin, isAdmin} = require('../middlewares/permissions')
 
 /* ------------------------------------------------------- */
 
@@ -20,7 +20,7 @@ router.route('/:id')
     .get(read)
     .put(isLogin, update)
     .patch(isLogin, update)
-    .delete(isLogin, deleteFlight)
+    .delete(isLogin ,isAdmin, deleteFlight)
 
 
 /* ------------------------------------------------------- */

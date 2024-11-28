@@ -21,8 +21,7 @@ module.exports = {
             `
         */
 
-        // const result = await flight.find()
-        const result = await res.getModelList(Passenger)
+        const result = await res.getModelList(Passenger, {}, "createdId")
 
         res.status(200).send({
             error: false,
@@ -48,7 +47,7 @@ module.exports = {
 
         const result = await Passenger.create(req.body)
 
-        res.status(200).send({
+        res.status(201).send({
             error: false,
             result
         })

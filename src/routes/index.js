@@ -21,9 +21,6 @@ router.use('/passengers', require('./passenger'))
 router.use('/reservations', require('./reservation'))
 
 
-
-
-
 // documents:
 router.use('/documents', require('./document'))
 

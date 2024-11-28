@@ -21,7 +21,6 @@ module.exports = {
             `
         */
 
-        // const result = await flight.find()
         const result = await res.getModelList(Flight)
 
         res.status(200).send({
@@ -41,14 +40,14 @@ module.exports = {
                 in:'body',
                 required: true,
                 schema: {
-                   $ref: '#/definitions/flight'
+                   $ref: '#/definitions/flights'
                 }
             }
         */
 
         const result = await Flight.create(req.body)
 
-        res.status(200).send({
+        res.status(201).send({
             error: false,
             result
         })
@@ -78,7 +77,7 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                    $ref: '#/definitions/flight'
+                    $ref: '#/definitions/flights'
                 }
             }
         */

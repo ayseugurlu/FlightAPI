@@ -8,8 +8,8 @@ const { login , refresh, logout} = require('../controllers/auth')
 
 // URL: /auth
 
-router.route('/login').post(login)
-router.route('/refresh').post(refresh)
-router.route('/logout').get(logout)
+router.post('/login',login)
+router.post("/refresh", refresh);
+router.get('/logout',logout)
 /* ------------------------------------------------------- */
 module.exports = router
