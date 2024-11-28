@@ -34,18 +34,23 @@
           "Authentication"
         ],
         "summary": "Login",
-        "description": "Login with username (or email) and password for JWT",
+        "description": "Login with username (or email) and password to get an access token and refresh token.",
         "parameters": [
           {
             "name": "body",
             "in": "body",
             "required": true,
+            "description": "User credentials for login",
             "schema": {
               "type": "object",
               "properties": {
-                "username": {
+                "userName": {
                   "type": "string",
-                  "example": "test"
+                  "example": "testUser"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "test@example.com"
                 },
                 "password": {
                   "type": "string",
@@ -57,14 +62,81 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Login successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "bearer": {
+                  "type": "object",
+                  "properties": {
+                    "access": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    },
+                    "refresh": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Missing required fields",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Username / Email and Password required!"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Incorrect credentials or inactive account",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Incorrect Credentials!"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
     },
     "/auth/refresh": {
       "post": {
-        "description": "",
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Refresh",
+        "description": "Refresh access token using the refresh token.",
         "parameters": [
           {
             "name": "body",
@@ -74,24 +146,96 @@
               "properties": {
                 "createdId": {
                   "example": "any"
+                },
+                "in": {
+                  "example": "any"
+                },
+                "required": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "schema": {
+                  "example": "any"
                 }
               }
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Access token   successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "bearer": {
+                  "type": "object",
+                  "properties": {
+                    "access": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing refresh token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Invalid refresh token."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
     },
     "/auth/logout": {
       "get": {
-        "description": "",
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Logout",
+        "description": "Logs out the user. For JWT, no server-side process is required; tokens simply expire on their own.",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Logout successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "JWT: No need any process for logout."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
