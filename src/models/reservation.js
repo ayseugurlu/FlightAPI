@@ -1,11 +1,9 @@
 "use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS | Flight API
+	NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
-
-const {mongoose} = require('../configs/dbConnection')
-
-/*
+const { mongoose } = require('../configs/dbConnection')
+/* ------------------------------------------------------- *
 {
 	"flightId": "652cebb3bae9cde5e8a9753b",
 	"passengers": [
@@ -24,35 +22,32 @@ const {mongoose} = require('../configs/dbConnection')
 	],
 	"createdId": "652ceaa1bae9cde5e8a97522"
   }
-
-  /* //----------------------------------------*/
-
+/* ------------------------------------------------------- */
+// Reservation Model:
 
 const ReservationSchema = new mongoose.Schema({
-    flightId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Flight',
-        required: true
-    },
 
-    passengers:[
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Passenger',
-            required:true
-        }
-    ],
+	flightId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Flight',
+		required: true,
+	},
 
-    createdId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required:true
-    }
+	passengers: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'User',
+			required: true,
+		}
+	],
 
+	createdId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User',
+		required: true,
+	},
 
-}, {
-    collection: 'reservations',
-    timestamps: true
-})
+}, { collection: 'reservations', timestamps: true })
 
+/* ------------------------------------------------------- */
 module.exports = mongoose.model('Reservation', ReservationSchema)

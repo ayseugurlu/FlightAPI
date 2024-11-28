@@ -15,7 +15,7 @@ const document = {
 		title: packageJson.title,
 		description: packageJson.description,
 		termsOfService: "http://www.clarusway.com",
-		contact: { name: packageJson.author, email: "ali@clarusway.com" },
+		contact: { name: packageJson.author, email: "ayseugurlu@clarusway.com" },
 		license: { name: packageJson.license, },
 	},
 	host: `${HOST}:${PORT}`,

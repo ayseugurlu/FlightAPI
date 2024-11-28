@@ -7,21 +7,21 @@ const jwt = require('jsonwebtoken')
 
 module.exports = (req, res, next) => {
 
-    req.user = null 
+    req.user = null
 
-    const auth = req.headers?.authorization // Bearer ...accessToken...
+    const auth = req.headers?.authorization || null
+    const tokenKey = auth ? auth.split(' ') : null
 
-    const tokenKey = auth ? auth.split(' ') : null //['Bearer', '...accessToken...']
+    if (tokenKey && tokenKey[0] == "Bearer") {
 
-    if(tokenKey){
+        jwt.verify(tokenKey[1], process.env.ACCESS_KEY, function (error, accessData) {
 
-        jwt.verify( tokenKey[1], process.env.ACCESS_KEY, (err, accessData) => {
             req.user = accessData ? accessData : null
             req.body.createdId = req.user?._id
-        })
-     
-    }
 
-   
+        })
+
+    }
+    
     next()
 }

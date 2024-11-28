@@ -1,6 +1,6 @@
 {
   "title": "Flight Reservation API",
-  "name": "19-flightapi",
+  "name": "flightapi",
   "version": "1.0.0",
   "description": "Flight Reservation Management System",
   "main": "index.js",
@@ -11,7 +11,6 @@
   "author": "Ayse Ugurlu",
   "license": "ISC Licence",
   "dependencies": {
-    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",

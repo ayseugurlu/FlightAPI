@@ -3,23 +3,23 @@
     NODEJS EXPRESS | Flight API
 ------------------------------------------------------- */
 const router = require('express').Router()
-const {list, create, read, update, deleteReservation} = require('../controllers/reservation')
-const {isAdmin, isStaffOrAdmin} = require('../middlewares/permissions')
+const permissions = require('../middlewares/permissions')
+const reservation = require('../controllers/reservation')
 /* ------------------------------------------------------- */
 
-// URL: /passengers
+// URL: /reservations
 
+router.use(permissions.isStaffOrAdmin)
 
 router.route('/')
-    .get(list)
-    .post(create)
+    .get(reservation.list)
+    .post(reservation.create)
 
 router.route('/:id')
-    .get(read)
-    .put(update)
-    .patch(update)
-    .delete(deleteReservation)
-
+    .get(reservation.read)
+    .put(reservation.update)
+    .patch(reservation.update)
+    .delete(permissions.isAdmin, reservation.delete)
 
 /* ------------------------------------------------------- */
 module.exports = router

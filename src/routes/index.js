@@ -5,23 +5,19 @@
 const router = require('express').Router()
 /* ------------------------------------------------------- */
 
+// URL: /
 
-// auth
+// auth:
 router.use('/auth', require('./auth'))
 // user:
 router.use('/users', require('./user'))
-
-//flights
-router.use('/flights', require('./flight')) 
-
-//passengers
+// flight:
+router.use('/flights', require('./flight'))
+// passenger:
 router.use('/passengers', require('./passenger'))
-
-//reservatiopns
+// reservation:
 router.use('/reservations', require('./reservation'))
-
-
-// documents:
+// document:
 router.use('/documents', require('./document'))
 
 /* ------------------------------------------------------- */

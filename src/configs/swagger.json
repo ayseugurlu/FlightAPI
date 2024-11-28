@@ -6,8 +6,8 @@
     "description": "Flight Reservation Management System",
     "termsOfService": "http://www.clarusway.com",
     "contact": {
-      "name": "Ayse Ugurlu",
-      "email": "ayseugurlu@gmail.com"
+      "name": "Clarusway",
+      "email": "ali@clarusway.com"
     },
     "license": {
       "name": "ISC Licence"
@@ -34,23 +34,18 @@
           "Authentication"
         ],
         "summary": "Login",
-        "description": "Login with username (or email) and password to get an access token and refresh token.",
+        "description": "Login with userName (or email) and password for get simpleToken and JWT",
         "parameters": [
           {
             "name": "body",
             "in": "body",
             "required": true,
-            "description": "User credentials for login",
             "schema": {
               "type": "object",
               "properties": {
                 "userName": {
                   "type": "string",
-                  "example": "testUser"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@example.com"
+                  "example": "test"
                 },
                 "password": {
                   "type": "string",
@@ -62,70 +57,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Login successful",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "boolean",
-                  "example": false
-                },
-                "bearer": {
-                  "type": "object",
-                  "properties": {
-                    "access": {
-                      "type": "string",
-                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-                    },
-                    "refresh": {
-                      "type": "string",
-                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-                    }
-                  }
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request - Missing required fields",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Username / Email and Password required!"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - Incorrect credentials or inactive account",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Incorrect Credentials!"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
+            "description": "OK"
           }
         }
       }
@@ -136,28 +68,23 @@
           "Authentication"
         ],
         "summary": "Refresh",
-        "description": "Refresh access token using the refresh token.",
+        "description": "Refresh with   for get accessToken",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "createdId": {
-                  "example": "any"
-                },
-                "in": {
-                  "example": "any"
-                },
-                "required": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                },
-                "schema": {
-                  "example": "any"
+                "bearer": {
+                  "type": "object",
+                  "properties": {
+                    "refresh": {
+                      "type": "string",
+                      "example": "...refresh_token..."
+                    }
+                  }
                 }
               }
             }
@@ -165,47 +92,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Access token   successfully",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "boolean",
-                  "example": false
-                },
-                "bearer": {
-                  "type": "object",
-                  "properties": {
-                    "access": {
-                      "type": "string",
-                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-                    }
-                  }
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - Invalid or missing refresh token",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Invalid refresh token."
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
+            "description": "OK"
           }
         }
       }
@@ -215,27 +102,11 @@
         "tags": [
           "Authentication"
         ],
-        "summary": "Logout",
-        "description": "Logs out the user. For JWT, no server-side process is required; tokens simply expire on their own.",
+        "summary": "logout",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Logout successful",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "boolean",
-                  "example": false
-                },
-                "message": {
-                  "type": "string",
-                  "example": "JWT: No need any process for logout."
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
+            "description": "OK"
           }
         }
       }
@@ -470,7 +341,7 @@
           "Flights"
         ],
         "summary": "List Flights",
-        "description": "\r  You can send query with endpoint for filter[], search[], sort[], page and limit.\r  <ul> Examples:\r   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>\r   <li>URL/?<b>page=2&limit=1</b></li>\r  </ul>\r  ",
+        "description": "\r  You can send query with endpoint for search[], sort[], page and limit.\r  <ul> Examples:\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>\r   <li>URL/?<b>page=2&limit=1</b></li>\r  </ul>\r  ",
         "responses": {
           "200": {
             "description": "OK"
@@ -489,7 +360,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/flights"
+              "type": "object",
+              "properties": {}
             }
           }
         ],
@@ -505,7 +377,7 @@
         "tags": [
           "Flights"
         ],
-        "summary": "Read Flight",
+        "summary": "Get Single Flight",
         "description": "",
         "parameters": [
           {
@@ -539,7 +411,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/flights"
+              "type": "object",
+              "properties": {}
             }
           }
         ],
@@ -576,8 +449,11 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -599,7 +475,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/flights"
+              "type": "object",
+              "properties": {}
             }
           }
         ],
@@ -616,7 +493,7 @@
           "Passengers"
         ],
         "summary": "List Passengers",
-        "description": "\r  You can send query with endpoint for filter[], search[], sort[], page and limit.\r  <ul> Examples:\r   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>\r   <li>URL/?<b>page=2&limit=1</b></li>\r  </ul>\r  ",
+        "description": "\r  You can send query with endpoint for search[], sort[], page and limit.\r  <ul> Examples:\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>\r   <li>URL/?<b>page=2&limit=1</b></li>\r  </ul>\r  ",
         "responses": {
           "200": {
             "description": "OK"
@@ -635,7 +512,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/flight"
+              "type": "object",
+              "properties": {}
             }
           }
         ],
@@ -651,7 +529,7 @@
         "tags": [
           "Passengers"
         ],
-        "summary": "Read Passenger",
+        "summary": "Get Single Passenger",
         "description": "",
         "parameters": [
           {
@@ -685,7 +563,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/flight"
+              "type": "object",
+              "properties": {}
             }
           }
         ],
@@ -722,8 +601,11 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -745,7 +627,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/flight"
+              "type": "object",
+              "properties": {}
             }
           }
         ],
@@ -762,7 +645,7 @@
           "Reservations"
         ],
         "summary": "List Reservations",
-        "description": "\r  You can send query with endpoint for filter[], search[], sort[], page and limit.\r  <ul> Examples:\r   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>\r   <li>URL/?<b>page=2&limit=1</b></li>\r  </ul>\r  ",
+        "description": "\r  You can send query with endpoint for search[], sort[], page and limit.\r  <ul> Examples:\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>\r   <li>URL/?<b>page=2&limit=1</b></li>\r  </ul>\r  ",
         "responses": {
           "200": {
             "description": "OK"
@@ -781,13 +664,47 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/flight"
+              "type": "object",
+              "properties": {
+                "flightId": {
+                  "type": "string",
+                  "example": "...Flight.objectId..."
+                },
+                "passengers": {
+                  "type": "array",
+                  "example": [
+                    "...Passenger.objectId...",
+                    {
+                      "firstName": "string",
+                      "lastName": "string",
+                      "email": "string:email"
+                    }
+                  ],
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "firstName": {
+                        "type": "string",
+                        "example": "string"
+                      },
+                      "lastName": {
+                        "type": "string",
+                        "example": "string"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "string:email"
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
           }
         }
       }
@@ -797,7 +714,7 @@
         "tags": [
           "Reservations"
         ],
-        "summary": "Read Reservation",
+        "summary": "Get Single Reservation",
         "description": "",
         "parameters": [
           {
@@ -831,7 +748,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/flight"
+              "type": "object",
+              "properties": {}
             }
           }
         ],
@@ -868,8 +786,11 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -891,7 +812,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/flight"
+              "type": "object",
+              "properties": {}
             }
           }
         ],

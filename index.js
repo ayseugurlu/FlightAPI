@@ -45,7 +45,6 @@ app.all('/', (req, res) => {
     res.send({
         error: false,
         message: 'Welcome to FLIGHT RESERVATION API',
-        documents: "/documents",
     })
 })
 

@@ -1,10 +1,9 @@
-"use strict";
+"use strict"
 /* -------------------------------------------------------
     NODEJS EXPRESS | Flight API
 ------------------------------------------------------- */
-
-const { mongoose } = require("../configs/dbConnection");
-/*------------------------------------
+const { mongoose } = require('../configs/dbConnection')
+/* ------------------------------------------------------- *
 {
     "flightNumber": "IS-AN-001",
     "airline": "THY",
@@ -23,55 +22,53 @@ const { mongoose } = require("../configs/dbConnection");
   "arrivalDate": "2020-10-02 03:00:00",
   "createdId": "65317b1c29b1267920ddf30d"
 }
+/* ------------------------------------------------------- */
+// Flight Model:
 
-*/ //---------------------------------------------
+const FlightSchema = new mongoose.Schema({
 
-const FlightsSchema = new mongoose.Schema(
-  {
-    flightNumber: {
-      type: Number,
-      required: true,
-      unique: true,
-      trim: true,
+    flightNumber: { // IS-AN-005
+        type: String,
+        trim: true,
+        required: true,
+        unique: true
     },
 
     airline: {
-      type: String,
-      required: true,
-      trim: true,
+        type: String,
+        trim: true,
+        required: true,
     },
 
-    deparature: {
-      type: String,
-      required: true,
-      trim: true,
+    departure: {
+        type: String,
+        trim: true,
+        required: true
     },
-    deparatureDate: {
-      type: Date,
-      required: true,
+
+    departureDate: {
+        type: Date,
+        required: true,
     },
 
     arrival: {
-      type: String,
-      required: true,
-      trim: true,
+        type: String,
+        trim: true,
+        required: true
     },
 
     arrivalDate: {
-      type: Date,
-      required: true,
+        type: Date,
+        required: true,
     },
 
     createdId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
-  },
-  {
-    collection: "flights",
-    timestamps: true,
-  }
-);
 
-module.exports = mongoose.model("Flight", FlightsSchema);
+}, { collection: 'flights', timestamps: true })
+
+/* ------------------------------------------------------- */
+module.exports = mongoose.model('Flight', FlightSchema)

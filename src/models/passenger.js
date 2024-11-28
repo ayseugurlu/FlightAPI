@@ -1,10 +1,8 @@
 "use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS | Flight API
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
-
-const {mongoose} = require('../configs/dbConnection')
-
+const { mongoose } = require('../configs/dbConnection')
 /* ------------------------------------------------------- *
 {
     "firstName": "FirstName 1",
@@ -14,47 +12,46 @@ const {mongoose} = require('../configs/dbConnection')
     "createdId": "65317b1c29b1267920ddf30d"
 }
 /* ------------------------------------------------------- */
+// Passenger Model:
 
-const passengerSchema = new mongoose.Schema({
+const PassengerSchema = new mongoose.Schema({
+
     firstName: {
         type: String,
-        required: true,
         trim: true,
-        set: (firstName) => firstName.toUpperCase() 
+        required: true,
     },
 
     lastName: {
         type: String,
-        required: true,
         trim: true,
-        set: (firstName) => firstName.toUpperCase()
+        required: true,
     },
 
-    gender:{
-        type:String,
+    gender: {
+        type: String,
         enum: [null, 'M', 'F'],
         default: null
     },
 
     email: {
         type: String,
-        required: [true, "Email field musst be reuired"],
+        trim: true,
+        required: [true, 'Email field must be required.'],
         unique: [true, 'There is this email. Email field must be unique.'],
         validate: [
             (email) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email),
             "Please fill a valid email address",
         ]
-
     },
 
-    createdId : {
+    createdId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required:true
-    }
-},{
-    collection: 'passengers',
-    timestamps:true
-})
+        required: true
+    },
 
-module.exports = mongoose.model('Passenger', passengerSchema)
+}, { collection: 'passengers', timestamps: true })
+
+/* ------------------------------------------------------- */
+module.exports = mongoose.model('Passenger', PassengerSchema)
